@@ -1,0 +1,257 @@
+Here’s your **updated HTML file** with the **live price calculator (Feature #8)** fully integrated and ready to use:
+
+---
+
+### ✅ Key Additions:
+
+* `#totalPrice` paragraph to show calculated price.
+* `roomRates` object with nightly prices.
+* `calculatePrice()` function.
+* Event listeners on form fields.
+* Optional bonus styling.
+
+---
+
+### ✅ Full Updated HTML:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hotel Shale | Luxury Stay in Bakuriani</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background: #fdf6f0;
+      color: #3e3a39;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #4a3c31;
+      color: #f2e8dc;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0 0 10px;
+      font-size: 3rem;
+      letter-spacing: 4px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.25rem;
+      font-style: italic;
+      opacity: 0.85;
+    }
+    nav {
+      background-color: #6d5a49;
+      text-align: center;
+      padding: 15px 0;
+    }
+    nav a {
+      color: #f2e8dc;
+      text-decoration: none;
+      margin: 0 25px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #d4c5a5;
+    }
+    main {
+      max-width: 720px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    section {
+      margin-bottom: 50px;
+    }
+    h2 {
+      border-bottom: 3px solid #6d5a49;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    ul li {
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+    form input, form select, form textarea, form button {
+      width: 100%;
+      padding: 12px 15px;
+      margin-top: 10px;
+      border: 1px solid #b9a58a;
+      border-radius: 5px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+      resize: vertical;
+    }
+    form input:focus, form select:focus, form textarea:focus {
+      border-color: #6d5a49;
+      outline: none;
+    }
+    form button {
+      background-color: #4a3c31;
+      color: #f2e8dc;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+    }
+    form button:hover {
+      background-color: #6d5a49;
+    }
+    footer {
+      background-color: #4a3c31;
+      color: #f2e8dc;
+      text-align: center;
+      padding: 25px 10px;
+      font-size: 0.9rem;
+      margin-top: 60px;
+    }
+    #confirmation {
+      background: #e6dccd;
+      border: 2px solid #6d5a49;
+      padding: 25px;
+      border-radius: 10px;
+      margin-top: 20px;
+      display: none;
+    }
+    #totalPrice {
+      color: #4a3c31;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Hotel Shale Tsagveri</h1>
+    <p>Luxury & Comfort in Bakuriani, Georgia</p>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#rooms">Rooms</a>
+    <a href="#booking">Book Now</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main>
+    <section id="about">
+      <h2>About Us</h2>
+      <p>Welcome to Hotel Shale, nestled in the snowy peaks of Bakuriani. Enjoy elegance, comfort, and modern amenities for the perfect getaway.</p>
+      <p>We have 11 rooms, 2 of which are suites.</p>
+    </section>
+
+    <section id="rooms">
+      <h2>Our Rooms</h2>
+      <ul>
+        <li><strong>2 Bed Room</strong> – $50/night</li>
+        <li><strong>3 Bed Room</strong> – $70/night</li>
+        <li><strong>4 Bed Room</strong> – $90/night</li>
+      </ul>
+    </section>
+
+    <section id="booking">
+      <h2>Book Your Stay</h2>
+      <form id="bookingForm" novalidate>
+        <input type="text" id="fullname" name="fullname" placeholder="Full Name" required />
+        <input type="email" id="email" name="email" placeholder="Email" required />
+        <input type="tel" id="phone" name="phone" placeholder="Phone Number" required pattern="[0-9\s\-\+]+" />
+        <label for="checkin">Check-in Date</label>
+        <input type="date" id="checkin" name="checkin" required />
+        <label for="checkout">Check-out Date</label>
+        <input type="date" id="checkout" name="checkout" required />
+        <input type="number" id="guests" name="guests" placeholder="Number of Guests" min="1" required />
+        <select id="roomtype" name="roomtype" required>
+          <option value="" disabled selected>Select Room Type</option>
+          <option value="Standard Room">2 Bed Room</option>
+          <option value="Deluxe Room">3 Bed Room</option>
+          <option value="Family Suite">4 Bed Room</option>
+        </select>
+        <textarea id="requests" name="requests" placeholder="Special Requests (optional)" rows="4"></textarea>
+        <button type="submit">Submit Booking Request</button>
+      </form>
+
+      <!-- Total Price Display -->
+      <p id="totalPrice"></p>
+
+      <div id="confirmation"></div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>📍 Didveli Street 65, Bakuriani, Georgia</p>
+      <p>📧 tsagverishale@gmail.com</p>
+      <p>📞 +995 555 393 393</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy;Hotel Shale</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('bookingForm');
+    const confirmation = document.getElementById('confirmation');
+    const totalPriceEl = document.getElementById('totalPrice');
+
+    const roomRates = {
+      'Standard Room': 50,
+      'Deluxe Room': 70,
+      'Family Suite': 90
+    };
+
+    function calculatePrice() {
+      const roomType = form.roomtype.value;
+      const checkin = new Date(form.checkin.value);
+      const checkout = new Date(form.checkout.value);
+
+      if (!roomType || isNaN(checkin) || isNaN(checkout) || checkout <= checkin) {
+        totalPriceEl.textContent = '';
+        return;
+      }
+
+      const nights = Math.ceil((checkout - checkin) / (1000 * 60 * 60 * 24));
+      const rate = roomRates[roomType];
+      const total = nights * rate;
+
+      totalPriceEl.textContent = `Estimated Total Price: $${total} (${nights} night${nights > 1 ? 's' : ''} @ $${rate}/night)`;
+    }
+
+    form.roomtype.addEventListener('change', calculatePrice);
+    form.checkin.addEventListener('change', calculatePrice);
+    form.checkout.addEventListener('change', calculatePrice);
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      calculatePrice();
+
+      const checkin = new Date(form.checkin.value);
+      const checkout = new Date(form.checkout.value);
+      if (checkout <= checkin) {
+        alert('Check-out date must be after check-in date.');
+        return;
+      }
+
+      const fullname = form.fullname.value.trim();
+      const email = form.email.value.trim();
+      const phone = form.phone.value.trim();
+      const guests = form.guests
+```

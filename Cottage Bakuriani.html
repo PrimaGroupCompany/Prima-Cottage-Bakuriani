@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bakuriani Home Rentals</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; background:#f4f4f4; color:#333 }
+    header { background:#2c3e50; color:#fff; padding:20px; text-align:center }
+    .container { max-width:1100px; margin:20px auto; padding:0 20px }
+    #filter-bar { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; align-items:center }
+    #filter-bar input, #filter-bar select, #filter-bar button { padding:8px; font-size:1em }
+    .listings { display:flex; flex-wrap:wrap; gap:20px }
+    .listing { background:#fff; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); width:calc(50% - 20px); display:flex; flex-direction:column; overflow:hidden }
+    .listing img { width:100%; height:auto; display:block }
+    .details { padding:15px; flex:1 }
+    .details h2 { margin:0 0 8px; font-size:1.2em }
+    .price { font-weight:bold; color:#2c3e50 }
+    .booking-form { padding:15px; border-top:1px solid #eee; background:#fafafa }
+    .booking-form input, .booking-form select, .booking-form button { width:100%; padding:8px; margin:5px 0 10px; box-sizing:border-box }
+    .booking-form button { background:#2c3e50; color:#fff; border:none; cursor:pointer }
+    .booking-form button:hover { background:#1a242f }
+    @media(max-width:768px){ .listing { width:100% } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Bakuriani Home Rentals</h1>
+    
+    <p>Find your perfect home in Bakuriani</p>
+  </header>
+
+  <div class="container">
+    <div id="filter-bar">
+      <input type="text" id="searchInput" placeholder="Search by name..." />
+      <label for="priceRange">Max Price:</label>
+      <select id="priceRange">
+        <option value="1000">Any</option>
+        <option value="400">₾400</option>
+        <option value="300">₾300</option>
+        <option value="230">₾230</option>
+        <option value="200">₾200</option>
+        <option value="140">₾140</option>
+        <option value="120">₾120</option>
+        <option value="115">₾115</option>
+        <option value="100">₾100</option>
+        <option value="40">₾40</option>
+      </select>
+      <button id="clearFilters">Clear Filters</button>
+    </div>
+
+    <div class="listings">
+      <!-- Listing 1: Shale -->
+      <div class="listing">
+        <img src="https://i.imgur.com/DVk20Lv.jpeg" alt="Shale">
+        <div class="details">
+          <h2>Shale</h2>
+          <p class="price" data-price="400"><strong>Price:</strong> ₾400/night</p>
+        </div>
+        <form class="booking-form" method="POST" action="mailto:tsagverishale@gmail.com" enctype="text/plain">
+          <h3>Book this property</h3>
+          <input type="tel" name="Phone" placeholder="Phone Number" required pattern="[\d\s\-\+]{7,15}" />
+          <input type="date" name="Check-in" required />
+          <input type="date" name="Check-out" required />
+          <select name="Guests"><option>1</option><option>2</option><option>3+</option></select>
+          <p class="total-price" style="font-weight:bold;"></p>
+          <button type="submit">Send Booking Request</button>
+        </form>
+      </div>
+
+      <!-- Listing 2: Green Hills -->
+      <div class="listing">
+        <img src="https://i.imgur.com/6kjmRfe.jpeg" alt="Green Hills">
+        <div class="details">
+          <h2>Green Hills</h2>
+          <p class="price" data-price="100"><strong>Price:</strong> ₾100/night</p>
+        </div>
+        <form class="booking-form" method="POST" action="mailto:tsagverishale@gmail.com" enctype="text/plain">
+          <h3>Book this property</h3>
+          <input type="tel" name="Phone" placeholder="Phone Number" required pattern="[\d\s\-\+]{7,15}" />
+          <input type="date" name="Check-in" required />
+          <input type="date" name="Check-out" required />
+          <select name="Guests"><option>1</option><option>2</option><option>3+</option></select>
+          <p class="total-price" style="font-weight:bold;"></p>
+          <button type="submit">Send Booking Request</button>
+        </form>
+      </div>
+
+      <!-- Listing 3: Cottage Chalet -->
+      <div class="listing">
+        <img src="https://i.imgur.com/HgJ4zM7.jpeg" alt="Cottage Chalet">
+        <div class="details">
+          <h2>Cottage Chalet</h2>
+          <p class="price" data-price="140"><strong>Price:</strong> ₾140/night</p>
+        </div>
+        <form class="booking-form" method="POST" action="mailto:tsagverishale@gmail.com" enctype="text/plain">
+          <h3>Book this property</h3>
+          <input type="tel" name="Phone" placeholder="Phone Number" required pattern="[\d\s\-\+]{7,15}" />
+          <input type="date" name="Check-in" required />
+          <input type="date" name="Check-out" required />
+          <select name="Guests"><option>1</option><option>2</option><option>3+</option></select>
+          <p class="total-price" style="font-weight:bold;"></p>
+          <button type="submit">Send Booking Request</button>
+        </form>
+      </div>
+
+      <!-- Listing 4: Lados Villa -->
+      <div class="listing">
+        <img src="https://i.imgur.com/C28CdJ0.jpeg" alt="Lados Villa">
+        <div class="details">
+          <h2>Lados Villa</h2>
+          <p class="price" data-price="230"><strong>Price:</strong> ₾230/night</p>
+        </div>
+        <form class="booking-form" method="POST" action="mailto:tsagverishale@gmail.com" enctype="text/plain">
+          <h3>Book this property</h3>
+          <input type="tel" name="Phone" placeholder="Phone Number" required pattern="[\d\s\-\+]{7,15}" />
+          <input type="date" name="Check-in" required />
+          <input type="date" name="Check-out" required />
+          <select name="Guests"><option>1</option><option>2</option><option>3+</option></select>
+          <p class="total-price" style="font-weight:bold;"></p>
+          <button type="submit">Send Booking Request</button>
+        </form>
+      </div>
+
+      <!-- Listing 5: 2 Cottage -->
+      <div class="listing">
+        <img src="https://i.imgur.com/N1R2WSC.jpeg" alt="2 Cottage">
+        <div class="details">
+          <h2>2 Cottage</h2>
+          <p class="price" data-price="115"><strong>Price:</strong> ₾115/night</p>
+        </div>
+        <form class="booking-form" method="POST" action="mailto:tsagverishale@gmail.com" enctype="text/plain">
+          <h3>Book this property</h3>
+          <input type="tel" name="Phone" placeholder="Phone Number" required pattern="[\d\s\-\+]{7,15}" />
+          <input type="date" name="Check-in" required />
+          <input type="date" name="Check-out" required />
+          <select name="Guests"><option>1</option><option>2</option><option>3+</option></select>
+          <p class="total-price" style="font-weight:bold;"></p>
+          <button type="submit">Send Booking Request</button>
+        </form>
+      </div>
+
+      <!-- Listing 6: 7 Bedroom Cottages -->
+      <div class="listing">
+        <img src="https://i.imgur.com/uB4ra1X.jpeg" alt="7 Bedroom Cottages">
+        <div class="details">
+          <h2>7 Bedroom Cottages</h2>
+          <p class="price" data-price="120"><strong>Price:</strong> ₾120/night</p>
+        </div>
+        <form class="booking-form" method="POST" action="mailto:tsagverishale@gmail.com" enctype="text/plain">
+          <h3>Book this property</h3>
+          <input type="tel" name="Phone" placeholder="Phone Number" required pattern="[\d\s\-\+]{7,15}" />
+          <input type="date" name="Check-in" required />
+          <input type="date" name="Check-out" required />
+          <select name="Guests"><option>1</option><option>2</option><option>3+</option></select>
+          <p class="total-price" style="font-weight:bold;"></p>
+          <button type="submit">Send Booking Request</button>
+        </form>
+      </div>
+
+      <!-- Listing 7: Elene -->
+      <div class="listing">
+        <img src="https://i.imgur.com/4k5WkAa.jpeg" alt="Elene">
+        <div class="details">
+          <h2>Elene</h2>
+          <p class="price" data-price="200"><strong>Price:</strong> ₾200/night</p>
+        </div>
+        <form class="booking-form" method="POST" action="mailto:tsagverishale@gmail.com" enctype="text/plain">
+          <h3>Book this property</h3>
+          <input type="tel" name="Phone" placeholder="Phone Number" required pattern="[\d\s\-\+]{7,15}" />
+          <input type="date" name="Check-in" required />
+          <input type="date" name="Check-out" required />
+          <select name="Guests"><option>1</option><option>2</option><option>3+</option></select>
+          <p class="total-price" style="font-weight:bold;"></p>
+          <button type="submit">Send Booking Request</button>
+        </form>
+      </div>
+
+      <!-- Listing 8: Orbi -->
+      <div class="listing">
+        <img src="https://i.imgur.com/JfMGsG0.jpeg" alt="Orbi">
+        <div class="details">
+          <h2>Orbi</h2>
+          <p class="price" data-price="40"><strong>Price:</strong> ₾40/night</p>
+        </div>
+        <form class="booking-form" method="POST" action="mailto:tsagverishale@gmail.com" enctype="text/plain">
+          <h3>Book this property</h3>
+          <input type="tel" name="Phone" placeholder="Phone Number" required pattern="[\d\s\-\+]{7,15}" />
+          <input type="date" name="Check-in" required />
+          <input type="date" name="Check-out" required />
+          <select name="Guests"><option>1</option><option>2</option><option>3+</option></select>
+          <p class="total-price" style="font-weight:bold;"></p>
+          <button type="submit">Send Booking Request</button>
+        </form>
+      </div>
+
+      <!-- Listing 9: Villa in Didveli 1 -->
+      <div class="listing">
+        <img src="https://i.imgur.com/HqbuQuv.jpeg" alt="Villa in Didveli">
+        <div class="details">
+          <h2>Villa in Didveli</h2>
+          <p class="price" data-price="200"><strong>Price:</strong> ₾200/night</p>
+        </div>
+        <form class="booking-form" method="POST" action="mailto:tsagverishale@gmail.com" enctype="text/plain">
+          <h3>Book this property</h3>
+          <input type="tel" name="Phone" placeholder="Phone Number" required pattern="[\d\s\-\+]{7,15}" />
+          <input type="date" name="Check-in" required />
+          <input type="date" name="Check-out" required />
+          <select name="Guests"><option>1</option><option>2</option><option>3+</option></select>
+          <p class="total-price" style="font-weight:bold;"></p>
+          <button type="submit">Send Booking Request</button>
+        </form>
+      </div>
+
+      <!-- Listing 10: Villa in Didveli 2 -->
+      <div class="listing">
+        <img src="https://i.imgur.com/lxl8tA1.jpeg" alt="Villa in Didveli">
+        <div class="details">
+          <h2>Villa in Didveli</h2>
+          <p class="price" data-price="200"><strong>Price:</strong> ₾200/night</p>
+        </div>
+        <form class="booking-form" method="POST" action="mailto:tsagverishale@gmail.com" enctype="text/plain">
+          <h3>Book this property</h3>
+          <input type="tel" name="Phone" placeholder="Phone Number" required pattern="[\d\s\-\+]{7,15}" />
+          <input type="date" name="Check-in" required />
+          <input type="date" name="Check-out" required />
+          <select name="Guests"><option>1</option><option>2</option><option>3+</option></select>
+          <p class="total-price" style="font-weight:bold;"></p>
+          <button type="submit">Send Booking Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:fixed;bottom:0;left:0;width:100%;background:#2c3e50;color:#fff;text-align:center;padding:10px">
+    Need help? <a href="tel:+995555393393" style="color:#fff;text-decoration:underline">📞 Call Us</a>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const priceRange = document.getElementById("priceRange");
+    const listings = document.querySelectorAll(".listing");
+
+    function filterListings() {
+      const term = searchInput.value.toLowerCase();
+      const max = Number(priceRange.value);
+      listings.forEach(l => {
+        const title = l.querySelector("h2").textContent.toLowerCase();
+        const price = Number(l.querySelector(".price").dataset.price);
+        l.style.display = (title.includes(term) && price <= max) ? "flex" : "none";
+      });
+    }
+
+    searchInput.addEventListener("input", filterListings);
+    priceRange.addEventListener("change", filterListings);
+    document.getElementById("clearFilters").addEventListener("click", () => {
+      searchInput.value = "";
+      priceRange.value = "1000";
+      filterListings();
+    });
+
+    const getNights = (a, b) => Math.floor((new Date(b) - new Date(a)) / (1000*60*60*24));
+
+    document.querySelectorAll(".booking-form").forEach(form => {
+      const phone = form.querySelector("input[name='Phone']");
+      const ci = form.querySelector("input[name='Check-in']");
+      const co = form.querySelector("input[name='Check-out']");
+      const tot = form.querySelector(".total-price");
+      const price = Number(form.closest(".listing").querySelector(".price").dataset.price);
+
+      const updateTotal = () => {
+        const nights = ci.value && co.value ? getNights(ci.value, co.value) : 0;
+        tot.textContent = nights > 0 ? `Total: $${nights * price} for ${nights} night(s)` : "";
+      };
+
+      ci.addEventListener("change", updateTotal);
+      co.addEventListener("change", updateTotal);
+
+      form.addEventListener("submit", e => {
+        if (!phone.value.trim()) {
+          alert("Please enter your phone number.");
+          e.preventDefault();
+          return;
+        }
+        const nights = getNights(ci.value, co.value);
+        if (nights <= 0) {
+          alert("Check-out must be after check-in.");
+          e.preventDefault();
+          return;
+        }
+        if (!confirm(`Book for ₾{nights} night(s)? Total cost: ₾${nights * price}`)) {
+          e.preventDefault();
+        }
+      });
+
+      ci.valueAsDate = new Date();
+    });
+
+    filterListings();
+  </script>
+
+</body>
+</html>
