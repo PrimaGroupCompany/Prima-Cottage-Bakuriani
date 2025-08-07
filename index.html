@@ -1,163 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF‑8" />
-  <meta name="viewport" content="width=device‑width, initial‑scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Loft Hotel</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet" />
   <style>
-    /* Sidebar & Map */
+    body {
+      margin: 0 0 0 300px;
+      font-family: 'Roboto', sans-serif;
+      background-image: url('https://i.imgur.com/4GKVux9.jpeg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      color: #e0e0e0;
+      transition: background-color 0.4s, color 0.4s;
+    }
+
+    body.light-mode {
+      background-color: #fff;
+      color: #000;
+    }
+
+    body.light-mode .sidebar {
+      background-color: #f5f5f5;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    body.light-mode .sidebar h2,
+    body.light-mode .sidebar ul li a {
+      color: #333;
+    }
+
+    body.light-mode .sidebar ul li a:hover {
+      color: #f5c169;
+    }
+
     .sidebar {
       position: fixed;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 300px;
       height: 100%;
       background-color: #1a1a1a;
       padding: 2rem 1rem;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
       z-index: 999;
       display: flex;
       flex-direction: column;
       align-items: center;
       overflow-y: auto;
     }
-    .sidebar h2 { color:#f5c169; font-family:'Playfair Display'; text-align:center; margin-bottom:1.5rem; }
-    .sidebar ul { list-style:none; padding:0; width:100%; margin-bottom:2rem; }
-    .sidebar ul li { margin:1rem 0; }
-    .sidebar ul li a { color:#e0e0e0; font-size:1rem; text-decoration:none; padding:.5rem 0; display:block; transition:color .3s; }
-    .sidebar ul li a:hover { color:#f5c169; }
-    .map-cube {
-      width:100%;
-      height:250px;
-      border:2px solid #f5c169;
-      border-radius:8px;
-      overflow:hidden;
-      box-shadow:0 0 15px rgba(0,0,0,0.3);
-      margin-top:auto;
-      flex-shrink:0;
-    }
-    .map-cube iframe { width:100%; height:100%; border:none; }
 
-    /* Body & Mode */
-    body {
-      margin:0 0 0 300px;
-      font-family:'Roboto',sans-serif;
-      background-image:url('https://scontent.ftbs5-2.fna.fbcdn.net/v/t39.30808-6/487305218_1380510270071209_7928664251605576629_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=op3Dq2msl88Q7kNvwHrrezu&_nc_oc=AdlsgITBrjnNcmd2U1dyq975vGnF97XYijqEaitVoxnIBXG_CRKJ2KECi-s_attANsA&_nc_zt=23&_nc_ht=scontent.ftbs5-2.fna&_nc_gid=zBBu8sCO6VeaO4oc2a8jmQ&oh=00_AfSvXKfyxGGvPQOhBjUihjEDTgTOK_mKicXAUYTNZqtC6w&oe=6879726D');
-      background-size:cover;
-      background-attachment:fixed;
-      background-position:center;
-      color:#e0e0e0;
-      transition:background-color .4s, color .4s;
-    }
-    body.light-mode {
-      background-color:#fff;
-      color:#000;
-    }
-    body.light-mode .sidebar {
-      background-color:#f5f5f5;
-      box-shadow:2px 0 8px rgba(0,0,0,0.1);
-    }
-    body.light-mode .sidebar h2,
-    body.light-mode .sidebar ul li a {
-      color:#333;
-    }
-    body.light-mode .sidebar ul li a:hover {
-      color:#f5c169;
+    .sidebar h2 {
+      color: #f5c169;
+      font-family: 'Playfair Display';
+      margin-bottom: 1.5rem;
+      text-align: center;
     }
 
-    /* Hero & Buttons */
-    .hero { position:relative; height:100vh; overflow:hidden; }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar ul li a {
+      display: block;
+      padding: 0.5rem 0;
+      color: #e0e0e0;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .sidebar ul li a:hover {
+      color: #f5c169;
+    }
+
+    .map-cube iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+    }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
     .hero video {
-      position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover;
-      filter:brightness(0.5); z-index:-1;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.5);
+      z-index: -1;
     }
+
     .hero-content {
-      position:relative; top:50%; transform:translateY(-50%);
-      text-align:center; padding:0 1rem;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: center;
+      padding: 0 1rem;
     }
+
     .hero-content h1 {
-      font-family:'Playfair Display'; font-size:4rem; margin-bottom:1rem;
-      color:#f5c169;
+      font-size: 4rem;
+      font-family: 'Playfair Display';
+      color: #f5c169;
     }
-    .hero-content p { font-size:1.5rem; margin-bottom:2rem; }
+
+    .hero-content p {
+      font-size: 1.5rem;
+    }
 
     .btn {
-      background-color:#f5c169; color:#0f0f0f;
-      padding:.75rem 2rem; border:none; border-radius:4px;
-      font-weight:bold; cursor:pointer; transition:background .3s;
-    }
-    .btn:hover { background-color:#e0a94d; }
-    body.light-mode .btn {
-      background-color:#333; color:#fff;
-    }
-    body.light-mode .btn:hover {
-      background-color:#555;
+      background: #f5c169;
+      color: #0f0f0f;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 1rem;
     }
 
-    /* Sections */
-    .section { padding:4rem 1rem; text-align:center; }
-    .container { max-width:1100px; margin:auto; }
+    .btn:hover {
+      background-color: #e0a94d;
+    }
 
-    /* Rooms */
-    .room-grid { display:flex; flex-wrap:wrap; gap:2rem; justify-content:center; }
+    .section {
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .room-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
     .room-card {
-      background-color:#1a1a1a; padding:1rem;
-      border-radius:8px; width:300px;
-      border:1px solid #333; transition:transform .3s;
-    }
-    .room-card:hover { transform:translateY(-5px); }
-    .room-card img { width:100%; border-radius:6px; margin-bottom:1rem; }
-    body.light-mode .room-card {
-      background-color:#f5f5f5; color:#000; border:1px solid #ccc;
+      background-color: #1a1a1a;
+      padding: 1rem;
+      border-radius: 8px;
+      width: 300px;
+      border: 1px solid #333;
     }
 
-    /* Form */
+    .room-card img {
+      width: 100%;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+    /* flex */
     form {
-      display:flex; flex-direction:column; gap:1rem;
-      max-width:500px; margin:auto;
-    } 
+     display: flex;
+     flex-direction: column;
+     gap: 1rem;
+     max-width: 500px;
+     margin: auto;
+    }
+
     form input, form select {
-      padding:.75rem; background-color:#2a2a2a;
-      border:1px solid #444; color:#fff; border-radius:4px;
-    }
-    form input:focus, form select:focus {
-      border-color:#f5c169; outline:none;
-    }
-    body.light-mode form input, body.light-mode form select {
-      background-color:#fff; color:#000; border:1px solid #ccc;
+      padding: 0.75rem;
+      background: #2a2a2a;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 4px;
     }
 
-    /* Gallery */
     .gallery-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-      gap:1rem;
-      margin-top:2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
     }
-    .gallery-grid img { width:100%; border-radius:8px; }
 
-    /* Footer */
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
     footer {
-      background-color:#1a1a1a;
-      text-align:center; padding:2rem 1rem;
-      color:#999; border-top:1px solid #333;
-    }
-    body.light-mode footer {
-      background-color:#eee; color:#333;
+      background-color: #1a1a1a;
+      padding: 2rem;
+      text-align: center;
+      color: #999;
+      border-top: 1px solid #333;
     }
 
-    /* Success message */
-    .success-message { transition:opacity 1s; }
-    .success-message.fade-out { opacity:0; }
-       /* Total Price */
     #totalPrice {
       font-size: 1.2rem;
       color: #f5c169;
-      margin-top: 0.5rem;
     }
-    body.light-mode #totalPrice {
-      color: #000;
+    .success-message {
+      color: limegreen;
+      transition: opacity 1s;
+    }
+
+    .success-message.fade-out {
+      opacity: 0;
     }
   </style>
 </head>
@@ -172,25 +225,19 @@
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="map-cube" aria-label="Hotel Location Map">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2977.3230734875024!2d43.525194876579064!3d41.73512387435303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4043164ff25840ef%3A0x1a4149f9d0a3ae5b!2sLoft%20Hotel%20Bakuriani!5e0!3m2!1sen!2sge!4v1752332811459!5m2!1sen!2sge"
-        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-        title="Loft Hotel Bakuriani Location"
-      ></iframe>
+    <div class="map-cube">
+      <iframe src="https://www.google.com/maps/embed?pb=..." allowfullscreen loading="lazy"></iframe>
     </div>
   </nav>
 
-<button id="mode-toggle" class="btn" style="position:fixed; top:1rem; right:1rem; z-index:1000; font-size:1.5rem;" aria-label="Toggle Light and Dark Mode">
-  🌙
-</button>
-
+  <button id="mode-toggle" class="btn" style="position:fixed;top:1rem;right:1rem;z-index:1000;">🌙</button>
 
   <section class="hero">
-    <video autoplay muted loop>
+        <video autoplay muted loop>
       <source src="hero-bg.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+      // Y //
     </video>
+
     <div class="hero-content">
       <h1>Loft Hotel</h1>
       <p>Luxury reimagined in every detail</p>
@@ -198,160 +245,140 @@
     </div>
   </section>
 
-  <section id="about" class="section">
-    <div class="container">
-      <h2>Welcome to Loft Hotel</h2>
-      <p>Discover an oasis of serenity and sophistication nestled in the heart of the mountains. Experience fine dining and personalized service that makes your stay unforgettable.</p>
-    </div>
+  <section id="about" class="section container">
+    <h2>Welcome to Loft Hotel</h2>
+    <p>Experience serenity in the mountains with luxury rooms and gourmet dining.</p>
   </section>
 
-  <section id="rooms" class="section">
-    <div class="container">
-      <h2>Our Suites</h2>
-      <div class="room-grid">
-        <div class="room-card">
-          <img src="https://scontent.ftbs5-2.fna.fbcdn.net/v/t39.30808-6/511171629_1336053177951134_7165939320445828090_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=rzFLXM-UXMwQ7kNvwGHEOAS&_nc_oc=AdkdHSi5aEDWlUKrVIVR4ve2AFIasw8CUcW91ZjANrz6RZxijTh2Rxg2SeOEjFuAbrk&_nc_zt=23&_nc_ht=scontent.ftbs5-2.fna&_nc_gid=nwesUGQudlnfTe7tDI5YcQ&oh=00_AfQ1BVQx567oJuEjgrrbMXSSv2qq4GsWgSf_WBhv7-3_qQ&oe=68802025" alt="Deluxe Room">
-          <h3>2 Person</h3>
-          <p>From 150/night</p>
-        </div>
-        <div class="room-card">
-          <img src="https://scontent.ftbs5-2.fna.fbcdn.net/v/t39.30808-6/486803967_1263263578563428_7634183942463700236_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=oFeHlNKaRCwQ7kNvwEtJuAP&_nc_oc=Adn_i9cVAXuwBEYKslrUrU5XlohNbdWDGiBmPhYKjFg073Rt4kw7il9r4PrsGb2X_JE&_nc_zt=23&_nc_ht=scontent.ftbs5-2.fna&_nc_gid=TkDpX_MHu_R3W_N8SjyIWA&oh=00_AfSa-huDNh7kEGlRknPdZf3-Ysh_cXTHn4T5JhjUWFx7nQ&oe=6879478C" alt="Ocean Suite">
-          <h3>3 Person</h3>
-          <p>From 170/night</p>
-        </div>
-        <div class="room-card">
-          <img src="https://scontent.ftbs5-2.fna.fbcdn.net/v/t39.30808-6/511193824_1336052837951168_8411936406614770359_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=KCFfduSZ3xMQ7kNvwGzftQx&_nc_oc=Adl4gClXeib8X3adKrZvRX7MiUk9ydXb_RlJkTcd-RV869SBJnz23xuM7EnWC1F32LQ&_nc_zt=23&_nc_ht=scontent.ftbs5-2.fna&_nc_gid=n9TzyfWhnFa2DZMUn6kJmg&oh=00_AfSgB8Xf-nzSTmQvDQnR6-hj14wjN14TtORDw4V7MllUgQ&oe=68802ACD" alt="Family Suite">
-          <h3> 4 Person</h3>
-          <p>From 200/night</p>
-        </div>
+  <section id="rooms" class="section container">
+    <h2>Our Suites</h2>
+    <div class="room-grid">
+      <div class="room-card">
+        <img src="file:///C:/Users/ADMIN/Desktop/Loft/469110787_1291902268932010_5661975361787453598_n.jpg" alt="2 Person Room">
+        <h3>2 Person</h3><p>From $150/night</p>
+      </div>
+      <div class="room-card">
+        <img src="file:///C:/Users/ADMIN/Desktop/Loft/514252723_1355939065962545_5643342884085445658_n.jpg" alt="3 Person Room">
+        <h3>3 Person</h3><p>From $170/night</p>
+      </div>
+      <div class="room-card">
+        <img src="file:///C:/Users/ADMIN/Desktop/Loft/488925231_1271591861063933_6541061596219183470_n.jpg" alt="4 Person Room">
+        <h3>4 Person</h3><p>From $200/night</p>
       </div>
     </div>
   </section>
 
-  <section id="booking" class="section">
-    <div class="container">
-      <h2>Reserve Your Room</h2>
-      <form id="bookingForm">
-        <input type="text" id="name" name="name" placeholder="Full Name" required>
-        <input type="email" id="email" name="email" placeholder="Email Address" required>
-        <select id="roomType" name="roomType" required>
-          <option value="">Select Room Type</option>
-          <option value="2 Bedroom">2 Bedroom</option>
-          <option value="3 Bedroom">3 Bedroom</option>
-          <option value="4 Bedroom">4 Bedroom</option>
-        </select>
-        <input type="date" id="checkin" name="checkin" required>
-        <input type="date" id="checkout" name="checkout" required>
-        <p id="totalPrice"></p>
-        <button type="submit" class="btn">Confirm Booking</button>
+  <section id="booking" class="section container">
+    <h2>Reserve Your Room</h2>
+    <form id="bookingForm" action="https://formspree.io/f/xjkoepld" method="POST">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="box">
+      <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
 
-      </form>
-    </div>
-  </section>
-  <section id="gallery" class="section">
-    <div class="container">
-      <h2>Gallery</h2>
-      <div class="gallery-grid">
-        <img src="https://scontent.ftbs5-4.fna.fbcdn.net/v/t39.30808-6/510671863_1336052961284489_8790648839696539627_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=uN8rdPEaQ7cQ7kNvwEoW3U5&_nc_oc=AdmxtaXULtzCZTUBnKa3f4qr5RC2tKs_UfOHZBeGH_F8LfIlWAiCvmv4CbKreF3jPt0&_nc_zt=23&_nc_ht=scontent.ftbs5-4.fna&_nc_gid=uFTYTKPT3qA6Ep4_sslZaQ&oh=00_AfS1YZqxnIiXi9dldAA5EGFrKJD1ehd05mQZfXU6iUawXA&oe=68800089" alt="Hotel">
-        <img src="https://scontent.ftbs5-3.fna.fbcdn.net/v/t39.30808-6/489570820_1271851327704653_8262615506327720056_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=X54SvqeNgUgQ7kNvwGojYcU&_nc_oc=AdmSeJ_jqxCALdyEjTkcM8teBM6AcjCubbXYjry54Q1YXbrkZX6iSY4aYlzxtamqbIo&_nc_zt=23&_nc_ht=scontent.ftbs5-3.fna&_nc_gid=eikC3bmTHcjJCd4ksyNR8Q&oh=00_AfQ9HgXktTweUW8s6kSH9uQj6ZlBaCxufNayEIUphajRow&oe=687EC344" alt="Restaurant">
-        <img src="https://scontent.ftbs5-2.fna.fbcdn.net/v/t39.30808-6/488868239_1271591854397267_8834966911977956804_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=6o-sZ_tPYNYQ7kNvwEeNP81&_nc_oc=AdkET1Lr8WtozmM6pd6tp37w_3nQWEaxkHwmTCx6_V9J8-LE7VoJlp1THklz_y1Au3c&_nc_zt=23&_nc_ht=scontent.ftbs5-2.fna&_nc_gid=OL3yJf-I-DBbVUr1BScAaw&oh=00_AfS6Z_AeRFaQGeNPYikW4C8Uphc1Q9d7Icquh_oFkTcaJA&oe=687ED303" alt="Meeting Room">
-        <img src="https://scontent.ftbs5-4.fna.fbcdn.net/v/t39.30808-6/486609072_1260838238805962_8810160366183088852_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=3QyUv6qPGhYQ7kNvwGX4Cyf&_nc_oc=AdlTpq2EmhgBPf4X0-DHGLJj1v7LPyC1fZ3GbKWGyTOWEPYJOb-ECW0J78AlxJ33W24&_nc_zt=23&_nc_ht=scontent.ftbs5-4.fna&_nc_gid=GsUhebpbTLKvDTRP8nvFFg&oh=00_AfQXVWS1UVyu2Sm4Aq58kJosByzixTG3-04gvByVOHRP-Q&oe=687EED87" alt="Gym">
-      </div>
-    </div>
+      <input type="text" name="Full Name" placeholder="Full Name" required>
+      <input type="email" name="Email" placeholder="Email Address" required>
+      <select id="roomType" name="Room Type" required>
+        <option value="">Select Room Type</option>
+        <option value="2 Bedroom">2 Bedroom</option>
+        <option value="3 Bedroom">3 Bedroom</option>
+        <option value="4 Bedroom">4 Bedroom</option>
+      </select>
+      <input type="date" id="checkin" name="Check-in Date" required>
+      <input type="date" id="checkout" name="Check-out Date" required>
+
+      <p id="totalPrice"></p>
+
+      <button type="submit" class="btn">Confirm Booking</button>
+    </form>
   </section>
 
-  <section id="contact" class="section">
-    <div class="container">
-      <h2>Contact Us</h2>
-      <p>Email: tsagverishale@gmail.com</p>
-      <p>Phone: +995 555 393 393</p>
-      <p>Location: Didveli Street 65, Bakuriani, Georgia</p>
+  <section id="gallery" class="section container">
+    <h2>Gallery</h2>
+    <div class="gallery-grid">
+      <img src="https://i.imgur.com/WvDts4z.jpeg" alt="Gym">
+      <img src="https://i.imgur.com/DwVmUEQ.jpeg" alt="Meeting Room">
+      <img src="https://i.imgur.com/PDPZrJX.jpeg" alt="Billiard">
+      <img src="https://i.imgur.com/sgUsbwt.jpeg" alt="Cafeteria">
     </div>
   </section>
 
-  <footer>
-    <div class="container"><p>&copy; 2025 Loft Hotel. All rights reserved.</p></div>
+  <section id="contact" class="section container">
+    <h2>Contact Us</h2>
+    <p>Email: primagrouphotels@gmail.com</p>
+    <p>Phone: +995 555 393 393</p>
+    <p>Location: Didveli Street 65, Bakuriani, Georgia</p>
+  </section>
+
+  <footer class="container">
+    <p>&copy; 2025 Loft Hotel. All rights reserved.</p>
   </footer>
 
   <script>
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(el => {
-      el.addEventListener('click', e => {
-        e.preventDefault();
-        document.querySelector(el.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-      });
+    // Light/Dark Mode Toggle
+    const modeToggle = document.getElementById('mode-toggle');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    if (prefersLight) {
+      document.body.classList.add('light-mode');
+      modeToggle.textContent = '🌞';
+    }
+    modeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      modeToggle.textContent = document.body.classList.contains('light-mode') ? '🌞' : '🌙';
     });
 
-  const modeToggle = document.getElementById('mode-toggle');
-  const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    // Price Calculation
+    const roomType = document.getElementById('roomType');
+    const checkin = document.getElementById('checkin');
+    const checkout = document.getElementById('checkout');
+    const totalPrice = document.getElementById('totalPrice');
+    const rates = {
+      '2 Bedroom': 150,
+      '3 Bedroom': 170,
+      '4 Bedroom': 200
+    };
 
-  // Start with appropriate icon
-  if (prefersLight || document.body.classList.contains('light-mode')) {
-    document.body.classList.add('light-mode');
-    modeToggle.textContent = '🌞';
-  } else {
-    modeToggle.textContent = '🌙';
-  }
+    function updatePrice() {
+      const type = roomType.value;
+      const inDate = new Date(checkin.value);
+      const outDate = new Date(checkout.value);
+      if (!type || isNaN(inDate) || isNaN(outDate) || outDate <= inDate) {
+        totalPrice.textContent = '';
+        return;
+      }
+      const nights = Math.ceil((outDate - inDate) / (1000 * 60 * 60 * 24));
+      const price = rates[type] * nights;
+      totalPrice.textContent = `Estimated Total: $${price} (${nights} night${nights > 1 ? 's' : ''} @ $${rates[type]}/night)`;
+    }
 
-  modeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('light-mode');
-    modeToggle.textContent = document.body.classList.contains('light-mode') ? '🌞' : '🌙';
-  });
+    roomType.addEventListener('change', updatePrice);
+    checkin.addEventListener('change', updatePrice);
+    checkout.addEventListener('change', updatePrice);
 
-
-    // Booking form feedback
-    const form = document.querySelector('form');
-    form.addEventListener('submit', e => {
+    // Form submission with confirmation message
+    const form = document.getElementById('bookingForm');
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
       const btn = form.querySelector('button');
       btn.disabled = true;
       btn.textContent = 'Booking...';
+
       if (!form.querySelector('.success-message')) {
         const msg = document.createElement('p');
         msg.className = 'success-message';
-        msg.style.color = 'limegreen';
         msg.textContent = 'Booking confirmed! Check your email for details.';
         form.appendChild(msg);
         setTimeout(() => msg.classList.add('fade-out'), 4000);
         setTimeout(() => msg.remove(), 5000);
       }
+
       setTimeout(() => {
         btn.disabled = false;
         btn.textContent = 'Confirm Booking';
-      }, 2000);
+        form.submit(); // actually submit the form
+      }, 1500);
     });
-    // Add this below the booking form feedback code
-const roomType = document.getElementById('roomType');
-const checkin = document.getElementById('checkin');
-const checkout = document.getElementById('checkout');
-const totalPrice = document.getElementById('totalPrice');
-
-const rates = {
-  '2 Bedroom': 150,
-  '3 Bedroom': 170,
-  '4 Bedroom': 200
-};
-
-function updatePrice() {
-  const type = roomType.value;
-  const inDate = new Date(checkin.value);
-  const outDate = new Date(checkout.value);
-
-  if (!type || isNaN(inDate) || isNaN(outDate) || outDate <= inDate) {
-    totalPrice.textContent = '';
-    return;
-  }
-
-  const nights = Math.ceil((outDate - inDate) / (1000 * 60 * 60 * 24));
-  const price = rates[type] * nights;
-  totalPrice.textContent = `Estimated Total: $${price} (${nights} night${nights > 1 ? 's' : ''} @ $${rates[type]}/night)`;
-}
-
-roomType.addEventListener('change', updatePrice);
-checkin.addEventListener('change', updatePrice);
-checkout.addEventListener('change', updatePrice);
-
   </script>
 
 </body>
 </html>
+
